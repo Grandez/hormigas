@@ -1,0 +1,65 @@
+# Forewords {.unnumbered .unlisted}
+
+Este libro, que pretende ser formal en su contenido, se ha escrito intencionadamente en castellano de España y 
+de manera informal conscientemente; con esto queremos decir y excusarnos por:
+
+- Lo primero, defender el uso del segundo idioma, como idioma materno, y su riqueza lexicográfica y semántica 
+- No utilizar tipografía especial para, por ejemplo, palabras en otros idiomas diferentes al castellano
+- Utilizar palabras y expresiones de uso común frente a eufemismos y circunloquios, incluidas algunas 
+"poco apropiadas" para el lenguaje escrito.
+
+Este libro no pretende ser académico, se ha escrito "integramente de memoria"; es decir, está basado en los conocimientos,
+recuerdos y experiencias de los autores, sin usar, ni recurrir a fuentes externas, las cuales habría que citar y referenciar y le daría un aspecto más sólido. No obstante, y en la medida de lo posible, se harán las referencias 
+correctas a otros autores, pidiendo disculpas a todos aquellos que se nos hayan olvidado.
+
+La motivación para esto es simple:
+
+1. Rapidez en la ejecución, permitiendo una escritura mas libre y fresca
+2. Dificultar el copy/paste indiscrimado. Sí, por licencia puedes usar este libro como mejor te parezca, 
+y mejorarlo siempre y cuando mantengas los créditos de los autores y no lo vendas
+3. Si quieres hacer copy/paste, ¡Hazlo! Pero ten en cuenta que cualquier sistema básico de control de plagio
+lo detectará, y eso queda muy feo. Asi que te recomendamos que una vez copiado, por lo menos te esfuerzes un
+poco en reescribirlo mas formalmente (que tampoco es pedir mucho ¿no?)
+
+
+## Enfoque {.unnumbered .unlisted}
+
+Sabemos que leer un libro que ha escrito "alguien", que se dice gurú en lo suyo o que ha inventado la rueda, 
+es duro, y mas en la soledad; este, no solo es que sea duro, ¡es que además es peñazo! No solo no
+te vamos a decir nada que no hayas estudiado si no que además, te vamos a tocar las narices.
+
+Así que mejor toma este otro enfoque:
+
+- Has entrado en una nueva empresa, gracias a las mentiras que has puesto en el CV, tu prestigio y tu labia.
+De hecho, has entrado a un nuevo departamento, uno con nombre abstracto pero exclusivo, ya no eres becario, programador junior, programador senior (o sea viejo), analista técnico, etc.
+- Tu propia empresa, por méritos propios, te ha promocionado a otro departamento o área, eso es un triunfo, mas prestigio, normalmente mas respeto, etc. no necesariamente mas dinero, no necesariamente mas fácil, ...
+
+Entonces, en este contexto, te convocan a la reunión de bienvenida al club, en el aula magna (también llamada sala de convenciones en las empresas) en el que te aparecen tres o cuatro personas, en el escenario se entiende, 
+todo superguay, super preparado (¡Se llama presentación atontaó! lo que pasa es que tu todavía no lo sabes),
+y empieza el show:
+
+1. El CIO,CEO, CEA de turno, ese que igual has visto en las paginas web, os da la bienvenida, os alaba
+por llegar ahi, y ser una parte critica de la empresa y bla y bla y bla y bla. Todo ese discurso es real e importante, pero ni le haces caso ni te lo crees
+2. Se van, se queda un tipo vulgar, comun y feo (no friki, vulgar, comun y feo) que de primeras dice:
+
+- Buenas, me han dicho que por estrategia, necesidad o no se qué, habéis sido seleccionados y ya formáis
+parte de nuestro equipo
+- Asi que por mi parte, primero daros la bienvenida a la familia, y segundo, aunque os duela a algunos, durante estos tres dias, os voy a dar la chapa sobre:
+   1. Que o quienes somos, es decir, como o gestionamos aqui, que aceptamos y que no aceptamos. Esto es lo mas importante
+   2. Te voy a hablar de un montón de algoritmos, principios de diseño y otro monton de cosas que todos habéis estudiado, pero ¿Las teneis interiorizadas?
+   
+Por que esto va de esos principios:
+
+1. Usamos y evaluamos de forma natural un montón algoritmos y alternativas para un problema, sea este el que sea
+2. Proponemos al cliente uno en función de ciertos criterios
+3. Compartimos la información entre nosotros, estas en una familia, nos ayudamos y nos pegamos (sin que la sangre llegue al rio), pero nos ayudamos
+
+
+Yo lo intentaré hacer ameno, con metaforas, similes, pero no te equivoques, todo tiene un por qué, usa tu cerebro para enganchar todas las piezas, te deberia ser trivial
+
+Así que es este es el enfoque de este libro, tomalo como un curso no online entretenido donde, aunque no lo veas ahora, que te estas riendo, todo está donde debe estar y todo tiene su sentido y su orden.
+
+La idea es que te rias, que te aburras, y que cuando salgas, tu cerebro empieze a encajar las cosas en sus sitios adecuados
+   
+
+

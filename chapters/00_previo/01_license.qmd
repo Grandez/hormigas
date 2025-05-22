@@ -1,0 +1,8 @@
+# Licencia  {.unnumbered .unlisted}
+
+
+![](img/cc.png){width=32} ![](img/persona.png){width=32} ![](img/no_euro.png){width=32} **CC BY-NC 4.0**
+
+Este libro se ha escrito en cumplimiento de la licencia Creative Commons BY-CC 4.0 la cual la tienes 
+disponible en {@sec-license}
+

@@ -1,0 +1,12 @@
+---
+title: "Conceptos"
+---
+
+## Acerca de 
+
+La parte de conecptos
+
+{{< include conceptos/orden.qmd >}}
+{{< include conceptos/coste.qmd >}}
+{{< include conceptos/dominio.qmd >}}
+{{< include conceptos/deuda.qmd >}}

@@ -1,0 +1,143 @@
+# Algoritmo IRR
+
+Vamos a 
+
+
+
+## Costes computacionales
+
+| operacion |  rango       |
+|----------------|--------------|
+| +              | 1        |
+| -              | 1    |
+| *              | 1  | 3
+| /              | 5 | 10 |
+| exp            | 10 | 50 |
+| log            | 15 | 50 |
+| potencia       | exp + log |
+| if             | 2 |
+
+## Definición del caso
+
+Para usar unos datos manejables, usaremos un caso sencillo:
+
+Un préstamo personal de 1.000 Euros a un año con cuota constante post, pagos mensuales y sin comisiones.
+
+La formula desarrollada es la siguiente:
+
+
+$$
+f(i) = \frac{1000}{(1+i)^0} - \frac{100}{(1+i)^{31}} - \frac{100}{(1+i)^{59}} - \frac{100}{(1+i)^{90}} - \frac{100}{(1+i)^{120}} - \frac{100}{(1+i)^{151}} - \frac{100}{(1+i)^{181}} - \frac{100}{(1+i)^{212}} - \frac{100}{(1+i)^{243}} - \frac{100}{(1+i)^{273}} - \frac{100}{(1+i)^{303}} - \frac{100}{(1+i)^{334}} - \frac{100}{(1+i)^{365}}
+$$
+
+Coste computacional inicial:
+
+- Tenemos 13 términos
+- Cada término incluye:
+   - Una suma
+   - Una potencia
+   - Una division
+
+
+## Analisis
+
+## Eliminación de divisiones
+
+Dado un término cualquiera
+
+$$
+\frac{100}{(1+i)^{p}} = 100 * (1 + i)^{^-p}
+$$
+Es decir, cambiamos una operación de coste 10 por otra de coste 2
+
+## Eliminación de invariantes
+
+La variable independiente _i_, una vez definida, es constante y consecuentemente, $1 + i$ también los es.
+
+Definimos y calculamos $1 + i = I$
+
+Lo cual nos deja:
+
+$$
+f(i) = (1000 * I^0) - (100 * I^{31}) - (100 * I^{59}) - ...
+$$
+
+## Simplificación de potencias. Cambio de periodo
+
+Recalculamos los exponentes como:
+
+$p_n = ((p_n + 15) / 30$) / 30
+
+Donde la division es una division entera, coste 2
+
+
+$$
+f(i) = (1000 * I^0) - (100 * I^1) - (100 * I^2) - ... - (100 * I^{12})
+$$
+
+Esto introduce un pequeño error en la función que **es necesario demostrar** que esta absorvido por
+la precision requerida.
+
+
+## Eliminacion de potencias
+
+Si observamos la función actual:
+
+$$
+f(i) = (1000 * I^0) - (100 * I^1) - (100 * I^2) - ... - (100 * I^{12})
+$$
+
+La podemos reescribir como:
+
+$$
+n = p + q \\
+a^n = a^p * a^q  \\
+f(i) = (1000 * I^0) - (100 * I) - (100 * I * I) - (100 * I * I * I) - ... - (100 * I * I * ... * I) \\
+$$
+
+## Simplificacion
+
+El primer termino, siempre incluye $I^0 = 1$ luego lo sacamos del polinomio
+Calculamos el segundo término $100 * I = c_1$
+Y reescribimos la funcion:
+
+$$
+I = \frac{1}{1 + i} \\
+c_1 = cuota * I \\
+c_n = c_{n-1} * I \\
+f(i) = 1000 - \sum_{n=1}^{12} c_n * I
+$$
+Y nuestra función ahora es simplemente una multiplicación simple (coste 2) y sumas y restas (coste 1)
+
+## La precisión
+
+El algoritmo es iterativo, se asinga un _i_ y se calcula el polinomio.
+Solo falta el algoritmo que calcule el nuevo $i = i + \delta i$ de manera que se minimicen las
+iteraciones. Como se ha indicado, los algoritmos mas evolucionados consiguen una precisión de 10^-6 
+en tres o cuatro iteraciones, pero esos algoritmos, lamentablemente no los vamos a detallar aqui,
+pertenecen mas bien a las carreras internas entre profesionales: "Mi algoritmo consigue tu resultado
+en una iteración menos"
+
+### Algoritmo final
+
+```
+precision = 10 ** p
+i = objetivo
+ingresos = Flujo_0
+do {
+  I = (1 + i) ** -1
+  gasto = gasto_1 * I
+  gastos = gasto
+  idx = 2
+  mientras idx <= numero_flujos
+     gastos += gasto * I
+     idx = idx + 1     
+  fin_mientras
+  calcula i
+} mientras abs(ingresos - gastos) < precision
+
+
+```
+
+En este algoritmo solo hay una suma y una multiplicación
+

@@ -1,0 +1,263 @@
+### Caso 2: IRR
+
+En este caso vamos a presentar una fórmula a la que los autores le tienen especial cariño:
+
+Dado:
+
+1. Una serie de flujos que representan ingresos y egresos
+2. Una unidad de medida temporal, por defecto días, _p_
+
+$$
+IRR = \sum_{n=1}^{^m}\frac{flujo_n}{(1+i)^p} = 0
+$$
+¿Sencillita eh?
+
+Para aquellos que no la hayan reconocido, esa función se conoce como IRR (_Interest Rate Return_), y
+es como la "fórmula de cabecera" de cualquier financiero, bancario, y en general, cualquiera que
+necesite conocer la rentabilidad real de una operación o negocio.
+
+Además, su uso, y la corrección del dato, es de obligado cumplimiento con implicaciones legales para, 
+por ejemplo, todos las entidades financieras.
+
+Por otro lado, es dinámica, en el  sentido de que  evoluciona con el tiempo en función de:
+- El momento de tiempo que se tome (_t_)
+- Los flujos _efectivamente_ realizados (pasado)
+- Los cambios en la previsión de flujos (futuros)
+
+Lo cual obliga a recalcular _i_ cada vez que en una operación se produzca un cambio con respecto a
+la última vez que se calculó. Esto, de acuerdo con el principio WORM, supone que, para una entidad 
+financiera media, se diseñará una única vez, pero se va a ejecutar diariamente cientos de miles, si no
+millones de veces, una vez para cada una de las operaciones vivas de la entidad. 
+Por ejemplo, si al algoritmo le ahorramos 1 ms eso puede suponer ahorrar 1,5 meses de 
+CPU al año.
+
+
+Mas formalmente:
+
+
+``` { r eval=F, echo=F}
+
+f(i) = g(t)(i) =
+\left\{
+\begin{array}{l}
+g(t) = \sum_{m=1}^{j} \frac{\text{ingresos}_m}{(1+i)^t} = \sum_{g=1}^{k} \frac{\text{gastos}_g}{(1+i)^t} \\
+g(t) = \sum_{m=1}^{j} \frac{\text{movimiento}_m}{(1+i)^p} = 0 \\
+p = \text{número de periodos respecto de } t
+\end{array}
+\right.
+
+```
+
+#### Analisis de la función
+
+La función presenta, aproximadamente, el siguiente aspecto:
+
+```{r, echo=F}
+f_numeric <- function(x) {
+  (1 / (x + 1)) + (3 - x)
+}
+
+# Dibujar la función
+curve(f_numeric, from = -8,    to = -1.01, col = "blue", lwd = 2, xlim=c(-8,8), ylim=c(-20, 20), ylab="", xlab="")  
+curve(f_numeric, from = -0.99, to = 8,     col = "blue", lwd = 2, add=TRUE)
+
+abline(v = 0, lty = 1) # Ejes 
+abline(h = 0, lty = 1) 
+abline(v = -1, col = "red", lty = 2)  # asíntota vertical
+
+```
+
+La función es una función polinómica continua y derivable en todo punto menos en $i=-1$, pero no es necesariamente simétrica o impar.
+
+Y por poner un ejemplo sencillo en su versión extendida, podría ser de la siguiente forma, donde el subíndice
+representa cada uno de los terminos del polinomio:
+
+$$
+f(i) = 0 = 10000 - \frac{50_1}{(1+i)} - \frac{100_2}{(1+i)^2} - \frac{100_3}{(1+i)^{30}} - \frac{100_3}{(1+i)^{61}} - ... - \frac{112_{35}}{(1+i)^{980}} - \frac{112_{36}}{(1+i)^{1100}} - ...  - \frac{95_{495}}{(1+i)^{14600}}
+$$
+
+En este punto, dejaremos al lector que se detenga un tiempo y piense que alternativas tiene o usaría para su resolución.
+
+Pista:
+
+- Taylor
+- Newton
+- Ramson
+- Secante
+- Regresión lineal
+- Regresión polinómica
+- Gradiente
+- ...
+
+Todos esos algoritmos son capaces de resolver estos sistemas de manera genérica, cada uno con sus virtudes
+y defectos y el modo en el que se aproximan/obtienen el valor requerido.
+
+Además todos comparten las siguientes características:
+
+1. Es un proceso iterativo
+2. Cada iteración requiere calcular la fórmula completa
+
+#### La información del dominio
+
+Como se ha comentado, esta función tiene al menos una solución y existen algoritmos especializados para 
+resolver este tipo de ecuaciones con un Orden O($\log (i) * e^n$ ) y una constante oculta significativamente elevada.
+
+El dominio en el que estamos trabajando podemos denominarlo como "el dominio de las operaciones financieras", 
+el cual nos aporta un conjunto de atributos y propiedades aplicables únicamente a este dominio, que 
+aplicados con cierto criterio al problema original nos va a permitir una función equivalente a la original,
+pero que sea mucho mas simple de calcular.
+
+Con respecto al dominio de las operaciones financieras, tenemos, entre otras, las siguientes características
+específicas:
+
+**1.- Beneficio y coste son equivalentes y opuestos**
+
+De manera general, podemos asumir que si en una determinada operación he obtenido un beneficio del 5%,
+a la contraparte le ha supuesto un coste del 5%.
+
+Es decir: $Beneficio = -Coste$
+
+**2.- El objetivo de toda operación siempre es un beneficio**
+
+Lógicamente, no realizo operaciones para perder dinero,con lo que _i_, como rentabilidad, siempre será
+mayor o igual a cero,  independientemente de que algunas operaciones sean fallidas y supongan un coste.
+
+**3.- El Interés siempre es conocido**
+
+Cualquier operación financiera nace con una rentabilidad estimada, objetivo o contractual. Ese dato
+es conocido.
+
+Es decir, cuando firmas un préstamo conoces el tipo de interés nominal que te van a aplicar; cuando
+un broker registra una operación en el sistema indica cual es la rentabilidad objetivo de la operación
+
+**4.- Los flujos siempre están ordenados**
+
+En nuestro contexto, cada término del polinomio se conoce como "flujo", y estos siempre están ordenados
+temporalmente. No obstante, si no fuera así, sería suficiente con ordenarlos antes del proceso.
+
+**5.- Los flujos son periódicos**
+
+Salvo en casos excepcionales o específicos, en el mundo económico, los flujos siguen un patrón temporal conocido; por ejemplo,
+un préstamo es mensual o trimestral, una operación de swap es semanal, etc.
+
+**6.- Existe un margen de error definido (precisión)**
+
+Supongamos que la función se hace 0 en $\pi$: $f(i = \pi) = 0$ $
+
+Dicho de otra manera, aunque matemáticamente la función tiene solución, esta no es computable puesto que
+$\pi$ tiene infinitos decimales. Y también tenemos  que tener en consideración las limitaciones de los 
+ordenadores con arquitectura Von Neunman (Los que usamos actualmente)
+
+Por ese motivo, la función lleva asociada una precisión, normalmente asociada al volumen de la operación
+
+| precision * -1 |  rango       |
+|----------------|--------------|
+| 1              | [3,4)        |
+| 2              | [3.1,3.2)    |
+| 3              | [3.14,3.15)  |
+| 4              | [3.141,3.42) |
+| ...            |
+
+Para entendernos, si tengo una operación de 100 Euros, me es suficiente con saber que he ganado unos
+3 Euros, pero si mi operación es de 100 mil millones, que haya ganado o perdido unos 3.000 millones de Euros,
+"_igual, y solo igual_," no le acaba de convencer a mucha gente implicada en tu cuenta de resultados. 
+
+#### Aplicación de la información del dominio
+
+Del punto 2, sabemos que la variable _i_ **debe** ser mayor que cero. Luego podemos ignorar la parte 
+negativa del eje de abscisas, con lo que el rango de valores se reduce a la mitad.
+Como se ha comentado, esta función tiene al menos una solución y existen algoritmos especializados para 
+resolver este tipo de ecuaciones con un Orden O($\log (i) * e^p$ ) y una constante oculta significativamente elevada.
+
+En el punto 1, definimos la equivalencia entre Beneficio y Coste, dado que es posible que una operación
+sea fallida, _i < 0_, cuando se detecte que _i_ tiende a ser negativo, aplicaremos el siguiente cambio:
+
+$$
+f(i) =  
+\left\{
+\begin{array}{ll}
+f(i) &= \sum_{m=1}^{^j}\frac{ingresos_m}{(1+i)^t} - \sum_{g=1}^{^k}\frac{gastos_g}{(1+i)^t} \\
+f^`(i^`) &= \sum_{g=1}^{^k}\frac{gastos_g}{(1+i^`)^t} - \sum_{m=1}^{^j}\frac{ingresos_m}{(1+i^`)^t} \\
+i &= -i^` 
+
+\end{array}
+\right.
+
+$$
+Es decir, seguimos trabajando en la parte positiva del eje de abcisas, y además evitamos el punto crítico i = -1
+
+El punto 3, conocer un interés objetivo, lo utilizamos para hacer una aproximación mas inteligente
+al objetivo buscado.
+
+Ejemplo, supongamos que el interés objetivo es el 5%, y el valor real está representado en
+la curva siguiente como el valor máximo.
+
+En la gráfica hemos representado una búsqueda "ciega", empezando desde 0 y usando incrementos constantes por las líneas discontinuas. Después de seis iteraciones, todavía estamos lejos de
+alcanzar el valor buscado.
+
+Las líneas de puntos representa una búsqueda informada, empezamos con _i_ = 5, e inteligente,
+sin entrar en el detalle, las iteraciones se calculan en función del resultado anterior, llegando 
+al resultado buscado en tres iteraciones[^îteraciones]
+
+[^iteraciones]
+    El número de iteraciones requerido por los algoritmos avanzados usados actualmente se mueven
+    normalmente en el rango de 2-4 iteraciones en función de la precisión requerida
+    
+Además, aplicando esta característica, se elimina el término _log (p)_ del Orden de complejidad.
+
+```{r}
+x = seq(0, 10, length = 200)
+y = dnorm(x, mean = 5.5, sd = 1)
+plot(x, y, type = "l", lwd = 2, col = "blue", xlab="", ylab="")
+
+for (i in seq(0,6)) abline(v = i, col = "red", lwd = 2, lty = 2)   
+
+abline(v = 5.2, col = "green", lwd = 2, lty = 3)
+abline(v = 5.4, col = "green", lwd = 2, lty = 3)
+abline(v = 5.5, col = "green", lwd = 2, lty = 3)
+```
+
+
+Por el punto 6 podemos, sin pérdida de corrección, cambiar la fórmula original por la siguiente:
+
+
+$$
+
+f(i) = \lvert \sum \frac{\text{flujos}_m}{(1+i)^p} \rvert \leq 10^{-precision} 
+
+$$
+La cual, nos permite introducir un margen de error (la precisión).
+
+De los puntos 4 y 5, ordenación y periodicidad:
+
+$$
+\forall i,j \: si \: i < j \rightarrow p_i \leq p_j \\
+f(i) = \frac{flujo_1}{(1 + i)^0} + \frac{flujo_2}{(1 + i)^7} + \frac{flujo_1}{(1 + i)^7} + \frac{flujo_1}{(1 + i)^{14}} + \frac{flujo_1}{(1 + i)^{21}} + ...  \\
+f(i) = \frac{flujo_1}{(1 + i)^{7 * 0}} + \frac{flujo_2}{(1 + i)^{7 * 1}} + \frac{flujo_1}{(1 + i)^{7 * 1}} + \frac{flujo_1}{(1 + i)^{7 * 2}} + \frac{flujo_1}{(1 + i)^{7 * 3}} + ...  
+$$
+Lo cual nos va a permitir, simplificar y reutilizar cálculos de una manera significativa
+
+**Conclusión**
+
+Utilizando la información de dominio adecuadamente, podemos pasar de un algoritmo con coste: _k_ O(_log (i) * e^n_)
+a otro con coste _k^' < k * 10^-3 O(n)_
+
+### Caso real
+
+Cierta entidad española poseía la mayor cartera de préstamos del país, el proceso de recalcular y 
+notificar la rentabilidad a los clientes variaba entre 15 y 30 minutos.
+
+Otras entidades, con una cartera varios ordenes menor, el mismo proceso les costaba entre 4 y 8 horas
+
+Otras entidades, que usaban aproximaciones, sufrieron multas económicas severas por denuncias de clientes
+quejandose de que la información no era correcta.
+
+Anecdota: En la primera entidad se manejaba por defecto una precisión de 10 ** -7; es decir 6 decimales,
+una vez recibieron una queja de un cliente diciendo que el sexto decimal era un 6 y no un 4, ¡y tenía razón!
+Pero como responsable en esa época, no podía dejar de preguntarme, ¿de verdad has dedicado tu tiempo a calcular 
+la rentabilidad de tu préstamo personal al nivel de 6 decimales? 
+
+No lo olvides, eso siempre ocurrirá, y en ese caso, como en muchos otros, hay un por que. 
+Si demuestro que me estas dando información falsa, en este caso el sexto decimal, el dato es irrelevante,
+pero que la información no sea correcta es una falta o un delito
+

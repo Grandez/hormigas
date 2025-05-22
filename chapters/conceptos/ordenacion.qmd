@@ -1,0 +1,149 @@
+### Caso 1: Ordenación
+
+Asumimos que el lector conoce tanto la existencia de diferentes algoritmos de ordenación de elementos,
+como que el asumido como mas óptimo es el algoritmo conocido como _quick sort_ con un Orden = $O(n \log n)$.
+
+De manera general, y salvo que se indique lo contrario, todos los lenguajes de programación que 
+ofrecen un método o función de ordenación implementan ese algoritmo, lo cual es, _a priori_ correcto y óptimo.
+
+Veamos algunos casos específicos, todos ellos necesitan ordenar un conjunto de elementos, pero cada 
+uno de ellos tiene unas características específicas (Su dominio):
+
+#### Estabilidad
+
+En este negocio, el orden relativo en el que se reciben los elementos a ordenar es relevante.
+
+Por ejemplo, estamos ordenando ciertos flujos de caja por fecha, el orden natural en que los recibimos es:
+
+| Elemento | Fecha | Flujo  |
+|----------|-------|--------|
+| ...      | ...   | ....   |
+| n        | 01/01 | 10.000 |
+| n + 1    | 01/01 | -5.000 |
+| ...      | ...   | ....   |
+
+Es importante y necesario que ese orden parcial se mantenga, por que si el elemento n+1 se procesa 
+antes que el elemento n, después de la aplicación de la ordenación, podría abortar el proceso por 
+que no hay 5.000 um. disponibles, cuando la realidad es que primero se ingresaron 10.000 um. para 
+posteriormente extraer 5.000 um.
+
+**El algoritmo Quick Sort no garantiza una ordenación estable. Luego en este caso no es aplicable.*
+
+#### Coste temporal
+
+En este negocio, estamos en un sistema isocrono o en tiempo real; es decir, realizo procesos a intervalos fijos de tiempo.
+
+**El tiempo de ejecución de Quick Sort puede variar de $n log n$ a $n^2$**
+
+Con lo que tampoco es aplicable a nuestro negocio. _Heap Sort_ y _Merge Sort_, por ejemplo, siempre
+utilizan el mismo tiempo, ambos O(_n log n_) el primero no es estable y el segundo si.
+
+#### Conocimiento de la organización
+
+Supongamos el siguiente caso:
+
+Una parte de cierto proceso es realizar ciertos cálculos sobre un vector ordenado. Este vector tiene una longitud fija de 100 elementos (digamos una ventana) y se genera a intervalos de la siguiente manera:
+
+1. Llega un elemento nuevo
+2. Se elimina el ultimo elemento de un vector ya existente
+3. Se inserta el nuevo
+4. Se ordena el vector
+
+El pseudocódigo (o en este caso, código R) sería el siguiente:
+
+```{r evaluate=F}
+ordenar_vector = function (vector, new_item) {
+   new_vector = c(new_item, vector[1:length(vector) - 1])
+   sort(new_vector)
+}
+```
+
+Desde el punto de vista del código, no puede ser mas simple y sencillo:
+A) Crear el vector
+B) Ordenar el vector usando las herramientas del lenguaje, en este caso, la función _sort_
+
+**Analisis**
+
+Este código, como casi todos, sigue el principio WORM (Write Once Run Multiple(Millions)); es decir,
+Se escribe una única vez y se ejecuta las veces que sea necesario.
+
+Analizemos un poco mas el caso:
+
+La definición del caso nos indica que el vector tiene que estar ordenado, pero también que el vector
+se crea a partir de otro **YA** ordenado, al cual únicamente se le cambia **UN** elemento. Es decir,
+estamos, y por definición siempre estaremos, en uno de los casos peores del algoritmo _quick sort_.
+
+Por el contrario, es uno de los casos mejores para el algoritmo _bubble sort_
+
+**_Bubble Sort_ optimizado**
+
+Sabemos que solo hay un elemento fuera de orden, por lo que este elemento, dentro del algoritmo,
+irá intercambiándose con su elemento adyacente hasta un determinado elemento (en el peor caso, el último) 
+a partir del cual ya no habrá mas intercambios ya que se ha colocado el elemento en su sitio.
+
+Por lo que, en el momento en que no se produzca un intercambio, tenemos la certeza de que el vector
+está ordenado independientemente del momento.
+
+Consecuentemente podemos modificar el algoritmo para detectar esta situación y finalizar el proceso.
+
+```{r }
+quick_sort=c(50, "n log(n)", "n log(n)", "log(n<sup>2</sup>)")
+buble_sort=c(4, "n", "n<sup>2</sup>", "n<sup>2</sup>")
+buble_sort_optim=c(5, "1", "n/2", "n")
+df = data.frame(quick_sort, buble_sort, buble_sort_optim)
+df = t(df)
+colnames(df) = c("Constante (k)", "Best", "Average", "Worst")
+kable(df)
+```
+
+La columna constante, también conocida como constante oculta, hace referencia al coste real de la operación.
+Por ejemplo, el algoritmo bubble sort dice que el orden medio es n<sup>2</sup>; es decir, que para
+un determinado vector de longitud n, este se ordenará en $\frac{k * n^2}{ciclos_cpu_seg} \; segundos$
+
+En el caso de este algoritmo, cada iteración hace básicamente:
+
+- Una comparación: 1
+- Un intercambio: 2
+- Incrementa un indice: 1
+
+En el caso del algoritmo _quick sort_, al ser recursivo, se producen muchas llamadas a funciones
+y muchas variaciones de la pila, lo cual son procesos muy costosos, en este caso hemos optado
+por una constante orientativa por comparación y conservadora
+
+$$
+  \begin{aligned}
+     Coste_{qs} &= 50 * 100^2 = 50.000 \\
+     Coste_{bs} &= 4 * 100 = 400 \\
+     Coste_{bs2} &= 5 * 50 = 250
+   \end{aligned}
+$$
+
+#### Caso de negocio real
+
+Seguramente, muchos lectores pensarán que esto es irrelevante. 
+
+Lo siguiente es un caso real:
+
+Una empresa (A) cambió sus máquinas por el siguiente modelo mejorado de otra empresa (B), esta operación
+supuso una inversión de varios millones de euros que se justificada por un incremento significativo
+de la capacidad de procesamiento.
+
+El problema vino cuando se observó que la capacidad de procesamiento global había disminuido entre un
+15/20%.
+
+Es imaginable las alertas que saltaron y la crisis que se generó: A y B son dos empresas de relevancia mundial.
+Y aunque inicialmente B declaraba que eso no era posible y que las mejoras eran significativas, A demostraba
+que la perdida de capacidad era del 15/20%.
+
+Tras varios meses de estudios y análisis a todos los niveles, se identificó que:
+- B había modificado u optimizado la implementación de cierta instrucción (F) en base a ciertas cargas previstas de trabajo.
+- A usaba esta instrucción **EN UN UNICO PUNTO EN TODO SU SISTEMA**, pero ese punto se ejecutaba el 95% de todas sus operaciones
+
+Con respecto a la función en disputa, se identificó que **únicamente** costaba de media un 30% mas de tiempo que la anterior.
+
+Sin entrar en formulaciones matemáticas ni demostraciones estadísticas, que fue el último trabajo que realicé en este caso,
+quedó demostrado matemática y formalmente que ese incremento del 30% en la función F justificaba, o mas formalmente estaba directamente
+relacionado, con un decremento de entre el 15 y el 20% en la capacidad global del sistema.
+
+Simplemente por que alguien cambió (optimizó) el algoritmo de ordenación por defecto de la máquina.
+

@@ -1,0 +1,3 @@
+where = function() {
+   cat(getwd())
+}

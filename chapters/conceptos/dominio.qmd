@@ -1,0 +1,29 @@
+\clearpage
+
+## Información de dominio
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE)
+library(kableExtra)
+```
+
+### Definición
+
+Definimos "Información de dominio" de la siguiente manera:
+
+Dado un determinado problema, con respecto al cual existe una solución de tipo general.
+
+"***La información de dominio es el conjunto de características específicas de ese problema, las cuales,
+al incluirlas o tenerlas en consideración, y una vez obtenida la solución general, en el proceso de 
+definición de la solución final nos permite obtener una solución particular para el problema abordado
+mas óptima que la solución general sin invalidarla.***"
+
+### Explicación y aplicación
+
+JGG Aqui ampliamos la definicion, la explicamos.
+Presentamos la fase en la que aplica con su diagrama
+
+
+{{< include conceptos/ordenacion.qmd >}}
+
+{{< include conceptos/irr.qmd  >}}

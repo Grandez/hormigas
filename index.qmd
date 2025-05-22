@@ -1,9 +1,6 @@
-# Preface {.unnumbered}
 
-This is a Quarto book.
+{{< include chapters/00_previo/01_license.qmd >}}
+{{< include chapters/00_previo/02_forewords.qmd >}}
+{{< include chapters/00_previo/03_abstract.qmd >}}
+{{< include chapters/00_previo/99_toc.qmd >}}
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
-
-```{r}
-1 + 1
-```

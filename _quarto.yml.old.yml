@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "Las ciegas Hormigas Electricas"
+  title: "hormigas"
   author: "Julio Rivas"
   chapters:
      - index.qmd
@@ -13,7 +13,6 @@ book:
      - references.qmd
   appendices: 
     - chapters/appendix/license_cc.qmd
-    - chapters/appendix/irr_algo.qmd    
     
 bibliography: references.bib
 
@@ -24,9 +23,10 @@ format:
       - brand
   pdf:
     documentclass: scrbook
+    titlepage: false
     papersize: a4
     toc-title: Indice
-    toc: true
+    toc: false
     toc-depth: 4
     number-sections: true
 
