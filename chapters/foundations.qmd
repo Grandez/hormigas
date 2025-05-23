@@ -1,0 +1,10 @@
+---
+title: "Foundations"
+---
+
+## Acerca de 
+
+La parte de conceptos básicos y filosóficos previos a cualquier consideración
+
+{{< include foundations/matematicas.qmd >}}
+{{< include foundations/programacion_como_arte.qmd >}}

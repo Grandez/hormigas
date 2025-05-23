@@ -1,0 +1,54 @@
+# Información de dominio en la Física {#fisica_mc2}
+
+## Movimiento uniformemente acelerado
+
+La fórmula del movimiento uniformemente acelerado nos dice que el tiempo que tarda un objeto en caer
+desde una determinada altura (h) viene dado por la función:
+
+$$
+t = \sqrt {\frac{2h}{g}}
+$$
+
+En la que, _casual y antiintuitivamente_, la masa del objeto en cuestión es irrelevante (Si el lector
+no lo ha hecho, le sugiero que busque puentes sobre ríos a diferentes alturas y deje caer objetos de 
+diferentes pesos simultaneamente para verificar que empíricamente estos es así).
+
+¿Esto es siempre así para cualquier _h_? **No**
+¿Esto es válido siempre? **No**
+
+Este es un caso especial cuando el objeto esta en el vacío; es decir, no hay aire ni ningún fluido
+con el que interactue, pero es útil y valida para, digamos, la mayoría de los humanos, pero no lo
+es, por ejemplo, para la NASA que necesitaba saber con precisión donde y cuando va a caer un cohete,
+que también cae en caída libre.
+
+
+## La formula mas famosa del mundo
+
+Creemos que el lector no ha necesitado mas información para visualizar la fórmula en su mente.
+"Lamentablemente", ni es la más bonita, ni tampoco es correcta.
+
+**Esta** es la fórmula correcta según la dedujo A. Einstein:
+
+
+$$
+E = \sqrt {\frac{m_0 * v}{\sqrt{1 - \frac{v^2}{c^2}}} + {(m_0 * c^2)}^2}
+$$
+
+- $m_0$ es la masa de un objeto en reposo ABSOLUTO
+- $c$ es la velocidad de la luz en el vacío
+- $v$ es la velocidad del objeto
+
+Como caso particular, Si $v$ es muchísimo menor que $c$:
+
+1. Entonces $\frac{v^2}{c^2} \rightarrow 0$
+2. Luego la raíz cuadrada del primer término es 1
+3. El producto del primer término es practicamente un infinitésimo con respecto al segundo. Que ademas está elevado al cuadrado
+
+Y, ahora si, obtenemos "la fórmula mas famosa del mundo":
+
+$$
+E \approxeq mc^2
+$$
+Pero únicamente si la velocidad del objeto es _despreciable_ con respecto a la velocidad de la luz 
+
+

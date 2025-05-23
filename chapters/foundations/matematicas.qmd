@@ -1,0 +1,126 @@
+## Matemáticas, Físicas y computadoras
+
+Asumimos que, actualmente, nNadie podrá discutir que lo que ahora conocemos como _Tecnologias del Información y las Comunicaciones (TIC)_ 
+son una rama aplicada, mas o menos moderna, de las matemáticas implementada sobre artefactos (_hardware_)
+que se basan en procesos físicos avanzados.
+
+Veamos con mas detalle cada uno de ellos
+
+### Matemáticas {.unnumbered .unlisted}
+
+El _corpus_ completo Las matemáticas se construye a partir de los siguientes conceptos:
+
+1. **Axioma**: Afirmaciones aceptadas sin ninguna demostración previa
+2. **Definición**: Explicación precisa y no ambigüa de un concepto
+3. **Teorema**: Afirmaciones tautológicas **demostradas** en base a Axiomas o teoremas anteriores y de ámbito universal.
+4. **Lema**: Algo así como un teorema, usado para simplificar la demostración de un teorema completo
+5. **Corolario**: Las consecuencias de los teoremas, y por extensión, también correcto
+6. **Proposición**: Afirmación que se puede demostrar en base a teoremas y axiomas, pero que al contrario que un teorema, igual 
+no es de ámbito universal o no tiene esa relevancia
+7. **Conjetura**: Una afirmación que **no se ha verificado falsa** pero que **NO** ha sido verificada formalmente
+
+
+Primero definimos un cierto conjunto de axiomas:
+
+- $A \Longrightarrow A$ : Ley de identidad
+- $A \lor \neg A$: Ley del tercero excluso
+- $A$ y $\neg A$ no puede ser ciertas simultáneamente: Ley de no contradicción
+- 0 es un número natural
+- Todo número natural tiene un sucesor
+- 0 No es sucesor de ningún número natural
+- Dos números con el mismo sucesor son iguales
+
+A partir de ellos realizamos ciertas definiciones, que demostramos con teoremas, y sobre estos
+teoremas seguimos construyendo otras definiciones, teoremas, proposiciones, etc. progresivamente
+mas complejos sin tener que "empezar desde el inicio" cada vez.
+
+Podríamos decir que: La característica mas importante de las matemáticas es que en estas no existe
+la ambigüedad algo "es" o "no es". 
+
+### Ciencias Físicas {.unnumbered .unlisted}
+
+Aquí, me permitirán los lectores romper una lanza a favor de mis orígenes como estudiante representante 
+de la sección de Ciencias Físicas en la Universidad, y de las dos cosas que tengo mas interiorizadas:
+
+1. Físicas: La ciencia que intenta modelar y comprender **TODO** lo que ocurre en el universo
+2. Matemáticas: El lenguaje que inventaron los físicos para comunicarse y modelar
+
+Y por último, pero no por ello menos importante: 
+
+El objetivo final de las Físicas es encontrar "la ecuación del universo", llamémosla _teoría M_, 
+la cual es única y válida independientemente de la escala a la que se aplique.
+
+Por eso, a diferencia de las Matemáticas, en Físicas solo existen teorías, postulados y "leyes":
+
+1. **Teoría**: Algo que se cumple "teóricamente" (valga la redundancia) siempre por que **todavía** no
+se ha encontrado ninguna situación que la contradiga; es decir, algo es valido, conjeturalmente hablando,
+mientras no se demuestre un contraejemplo que lo invalide
+2. **Postulado**: Algo que "teóricamente", aquí teóricamente se refiere a matemáticamente, ocurre pero 
+que no disponemos de las herramientas para validarlo empíricamente.
+3. **Ley**: Algo similar a un axioma matemático, la descripción empírica de un fenómeno natural que siempre ocurre
+
+He de reconocer, que en este momento tuve que mirar las leyes y fórmulas de Newton, y que, afortunadamente,
+cumplen con los requisitos:
+
+a) Primera Ley: Un cuerpo permanece en estado de reposo o movimiento rectilíneo uniforme a menos que una fuerza externa actúe sobre él. O sea, tu no te mueves si algo no te obliga a hacerlo
+b) Segunda ley: La fuerza neta que actúa sobre un cuerpo es proporcional al producto de su masa y su aceleración. O dicha de otra forma, La masa es la resistencia del cuerpo al cambio de movimiento
+c) Tercera Ley: Por cada acción hay una reacción de igual magnitud y en sentido opuesto.
+
+Y me gustaría que prestárais atención a los detalles: La segunda ley dice que $F = m * a$ pero no 
+habla de como mido _m_ o _a_, ni de la proporción, solo que es proporcional.
+
+La principal diferencia de esta ciencia con las Matemáticas es que en esta si se soporta y es valido,
+en determinadas situaciones, la imprecisión, la incertidumbre y los casos especiales:
+
+- La imprecisión nos dice que, en determinados casos, un valor aproximado pero obtenido de una manera mucho
+mas sencilla puede ser aceptado como válido para el caso concreto que estamos manejando. Esto se suele indicar
+especificando ciertas asunciones e introduciendo los conceptos de "error despreciable" e irrelevancia de una dato
+con respecto a otro.
+- La incertidumbre (vease Heisenberg), nos dice que hay situaciones en las que no se pueden obtener con
+exactitud todas las variables
+- Los casos especiales hacen referencia a que, si definimos el caso, podemos dar por validas y aplicables ciertas
+teorías que se han demostrado incompletas de manera general, pero correctas si aplicamos ciertas limitaciones:
+En el vacío, en el mundo macroscópico, en ausencia de gravedad, etc.
+
+Una explicación mas detallada de esto se puede obtener en el appendice: @fisica_mc2 . Y volveremos 
+a hablar de la importancia de esto cuando presentemos el concepto "Información de Dominio" 
+
+### Computadoras {.unnumbered .unlisted}
+
+Preferimos el término "computadoras" (_computer_) frente a la acepción hispana de "ordenador" para 
+remarcar que estas máquinas:
+
+A) ***Solo*** realizan cálculos matemáticos.
+B) Están limitadas físicamente por los componentes utilizados
+
+Cuando escribimos, en cualquier lenguaje, una sentencia tan sencilla como: `IF A == B`
+
+La computadora realmente ejecuta: `Rx = NEG(A - B)` y te devuelve Rx, y asumimos que 0 es falso
+y distinto de 0 es cierto.
+
+Por otro lado, como hemos comentado, la computadora esos cálculos matemáticos (la base teórica) 
+utilizando dispositivos físicos (el mundo real), lo cual límita lo que es computable o no, y tenemos
+que ser conscientes de esas limitaciones y en la medida de lo posible, usarlas en nuestro beneficio.
+
+Como caso curioso, si alguien esta interesado, le invito a que programe el siguiente pseudocodigo
+en su lenguaje favorito:
+
+``` {eval = FALSE, echo=TRUE}
+A = pi
+B = 0 - pi
+C = A + B
+D = B + A
+
+si C == 0
+   imprime "C es cero"
+else   
+   imprime "C NO es cero"
+fin si   
+si D == 0
+   imprime "D es cero"
+else   
+   imprime "D NO es cero"
+fin si   
+
+```
+

@@ -1,0 +1,360 @@
+\clearpage
+## Knuth: La programación como arte
+
+Traducción del articulo de Donald E. Knuth disponible en [AMC Digital Library](https://dl.acm.org/doi/pdf/10.1145/361604.361612) 
+y publicado en Diciembre de 1.974
+
+Cuando *Communications of the ACM* comenzó su publicación en 1959, los miembros del Consejo Editorial de la ACM hicieron el siguiente comentario al describir los propósitos de las publicaciones de la ACM:  
+> “Si la programación de computadoras va a convertirse en una parte importante de la investigación y desarrollo en informática, debe lograrse una transición de la programación como arte hacia una ciencia disciplinada.”
+
+Tal objetivo ha sido un tema recurrente a lo largo de los años; por ejemplo, en 1970 leímos sobre “los primeros pasos hacia la transformación del arte de programar en una ciencia.”  
+Mientras tanto, de hecho hemos logrado convertir nuestra disciplina en una ciencia, y de una manera notablemente simple: simplemente decidimos llamarla “ciencias de la computación”.
+
+Implícita en estas declaraciones está la idea de que hay algo indeseable en una actividad humana que se clasifica como “arte”; debe ser una ciencia antes de que tenga verdadera estatura.  
+Por otro lado, llevo más de 12 años trabajando en una serie de libros titulados *El Arte de Programar Computadoras*. La gente me pregunta con frecuencia por qué elegí ese título; y de hecho, algunas personas aparentemente no creen que lo haya hecho, ya que he visto al menos una referencia bibliográfica a unos libros llamados *El Acto de Programar Computadoras*.
+
+En esta charla intentaré explicar por qué pienso que “arte” es la palabra adecuada. Discutiré qué significa que algo sea un arte, en contraste con ser una ciencia; trataré de examinar si los artes son cosas buenas o malas; y procuraré mostrar que una perspectiva adecuada del tema nos ayudará a todos a mejorar la calidad de lo que estamos haciendo actualmente.
+
+Una de las primeras veces que me preguntaron sobre el título de mis libros fue en 1966, durante la última reunión nacional de la ACM realizada en el sur de California. Esto fue antes de que se publicara alguno de los libros, y recuerdo que estaba almorzando con un amigo en el hotel de la convención.  
+Él ya sabía cuán engreído era yo en ese entonces, así que me preguntó si iba a llamar mis libros *Una Introducción a Don Knuth*. Le respondí que, por el contrario, estaba nombrando los libros en honor a él. Su nombre: Art Evans. (*El Arte de Programar Computadoras*, en persona).
+
+De esta historia podemos concluir que la palabra “arte” tiene más de un significado. 
+De hecho, una de las cosas más interesantes de esa palabra es que se usa en muchos sentidos distintos, 
+cada uno de los cuales es bastante apropiado en relación con la programación de computadoras. 
+Mientras preparaba esta charla, fui a la biblioteca para averiguar qué se ha escrito sobre la 
+palabra “arte” a lo largo de los años; y después de pasar varios días fascinantes entre estanterías,
+llegué a la conclusión de que “arte” debe ser una de las palabras más interesantes del idioma inglés.
+
+## Las Artes Antiguas {.unnumbered .unlisted}
+
+Si retrocedemos a las raíces latinas, encontramos *ars, artis*, que significa “habilidad”.  
+Quizá sea significativo que la palabra griega correspondiente era $\tau\epsilon\chi\nu\eta$ (*téchnē*),  
+la raíz de palabras como “tecnología” y “técnica”.
+
+Hoy en día, cuando alguien habla de “arte”, probablemente pienses primero en las “bellas artes”, como la pintura y la escultura,  
+pero antes del siglo XX la palabra se usaba generalmente en un sentido bastante diferente.  
+Como este significado más antiguo del término “arte” aún sobrevive en muchos giros del lenguaje —especialmente cuando lo contrastamos con la ciencia—,  
+me gustaría dedicar los próximos minutos a hablar del arte en su sentido clásico.
+
+En la época medieval, se fundaron las primeras universidades para enseñar las siete llamadas **“artes liberales”**, a saber:  
+gramática, retórica, lógica, aritmética, geometría, música y astronomía.  
+Obsérvese que esto es bastante diferente del currículo de las actuales facultades de artes liberales,  
+y que al menos tres de las siete artes liberales originales son componentes importantes de la informática.
+
+En aquel entonces, una “arte” significaba algo ideado por el intelecto humano, en contraposición a las actividades derivadas de la naturaleza o el instinto;  
+las “artes liberales” eran las artes libres o liberadas, en contraste con las artes manuales como el arado.  
+Durante la Edad Media, la palabra “arte” por sí sola usualmente significaba lógica, lo cual generalmente
+implicaba el estudio de los silogismos.
+
+## Ciencia vs. Arte {.unnumbered .unlisted}
+
+La palabra “ciencia” parece haber sido usada durante muchos años en un sentido bastante similar al de “arte”;  
+por ejemplo, también se hablaba de las siete ciencias liberales, que eran las mismas siete artes liberales.  
+Duns Escoto, en el siglo XIII, llamó a la lógica “la Ciencia de las Ciencias y el Arte de los Artes”.
+
+A medida que la civilización y el conocimiento se desarrollaron, las palabras adquirieron significados cada vez más independientes:  
+“ciencia” comenzó a utilizarse para referirse al conocimiento, y “arte”, a la aplicación de ese conocimiento.  
+Así, la ciencia de la astronomía era la base para el arte de la navegación.  
+La situación era casi exactamente igual a cómo hoy distinguimos entre “ciencia” e “ingeniería”.
+
+Muchos autores escribieron sobre la relación entre arte y ciencia en el siglo XIX,  
+y creo que la mejor discusión fue la que dio John Stuart Mill.  
+Él dijo lo siguiente, entre otras cosas, en 1843:
+
+> “Varias ciencias son a menudo necesarias para formar la base de un solo arte.  
+> Tal es la complejidad de los asuntos humanos, que para poder hacer una sola cosa, a menudo es necesario conocer la naturaleza y propiedades de muchas cosas...  
+> El arte en general consiste en las verdades de la Ciencia, ordenadas en la forma más conveniente para la práctica,  
+> en lugar del orden más conveniente para el pensamiento. La ciencia agrupa y organiza sus verdades de forma que nos permita captar de un vistazo  
+> la mayor parte posible del orden general del universo. El arte... reúne, desde partes del campo científico muy distantes entre sí,  
+> las verdades relacionadas con la producción de las diferentes y heterogéneas condiciones necesarias para cada efecto  
+> que requieren las exigencias de la vida práctica.”
+
+Mientras investigaba sobre los significados de “arte”, encontré que los autores han estado pidiendo una transición del arte hacia la ciencia durante al menos dos siglos.  
+Por ejemplo, el prefacio de un libro de texto sobre mineralogía, escrito en 1784, decía lo siguiente:
+
+> “Antes del año 1780, la mineralogía, aunque tolerablemente comprendida por muchos como un arte, difícilmente podía considerarse una ciencia.”
+
+Según la mayoría de los diccionarios, “ciencia” significa conocimiento que ha sido organizado y sistematizado lógicamente en forma de “leyes” generales.  
+La ventaja de la ciencia es que nos evita la necesidad de pensar cada caso individualmente;  
+podemos enfocar nuestros pensamientos en conceptos de nivel superior.  
+Como escribió John Ruskin en 1853:
+
+> “La labor de la ciencia es sustituir hechos por apariencias, y demostraciones por impresiones.”
+
+Me parece que si los autores que estudié estuvieran escribiendo hoy, estarían de acuerdo con la siguiente caracterización:  
+**la ciencia es conocimiento que entendemos tan bien que podemos enseñárselo a una computadora**;  
+y si no entendemos algo completamente, entonces es un arte tratar con ello.  
+Dado que la noción de algoritmo o programa de computadora nos proporciona una prueba extremadamente útil  
+del nivel de comprensión que tenemos sobre un tema, el proceso de pasar de arte a ciencia implica aprender a automatizar algo.
+
+La inteligencia artificial ha avanzado significativamente,  
+y sin embargo hay una gran brecha entre lo que las computadoras pueden hacer en el futuro previsible  
+y lo que las personas comunes pueden hacer.  
+Las percepciones misteriosas que tiene la gente al hablar, escuchar, crear —e incluso al programar—  
+siguen estando más allá del alcance de la ciencia; casi todo lo que hacemos sigue siendo un arte.  
+Desde este punto de vista, ciertamente es deseable convertir la programación en una ciencia,  
+y de hecho hemos avanzado mucho en los 15 años transcurridos desde que se publicaron  
+las observaciones que cité al inicio de esta charla.
+
+Hace quince años, la programación era tan poco comprendida que casi nadie pensaba en demostrar la corrección de los programas;  
+simplemente los manipulábamos hasta que “sabíamos” que funcionaban.  
+En aquel tiempo, ni siquiera sabíamos cómo expresar rigurosamente el concepto de que un programa era correcto.  
+Solo en los últimos años hemos comenzado a aprender sobre los procesos de abstracción mediante los cuales se escriben y comprenden los programas;  
+y este nuevo conocimiento sobre la programación está dando grandes frutos en la práctica,  
+aunque pocos programas se demuestran correctos con rigor completo,  
+ya que comenzamos a entender los principios de la estructura de programas.  
+
+Lo importante es que cuando escribimos programas hoy en día, sabemos que **en principio podríamos construir pruebas formales de su corrección si realmente lo quisiéramos**,  
+ya que entendemos cómo se formulan esas pruebas. Esta base científica está produciendo programas significativamente más fiables  
+que aquellos que escribíamos en épocas pasadas, cuando la intuición era el único criterio de corrección.
+
+El campo de la **programación automática** es una de las principales áreas de investigación en inteligencia artificial hoy en día.  
+A sus defensores les encantaría poder dar una charla titulada *“La programación de computadoras como un artefacto”*  
+(significando que la programación se ha vuelto un vestigio del pasado),  
+porque su objetivo es crear máquinas que escriban programas mejor que nosotros,  
+a partir únicamente de la especificación del problema.
+
+Personalmente, no creo que tal objetivo se logre completamente alguna vez,  
+pero sí considero que esa investigación es extremadamente importante,  
+porque **todo lo que aprendemos sobre programación nos ayuda a mejorar nuestro propio arte**.  
+En este sentido, debemos esforzarnos continuamente por transformar cada arte en una ciencia:  
+en el proceso, también **avanzamos el arte**.
+
+## Ciencia y Arte {.unnumbered .unlisted}
+
+Nuestra discusión indica que la programación de computadoras es, a estas alturas, tanto una ciencia como un arte,  
+y que estos dos aspectos se complementan de forma armoniosa.  
+Aparentemente, la mayoría de los autores que examinan este tipo de cuestiones llegan a la misma conclusión:  
+que su tema es tanto una ciencia como un arte, sea cual sea su campo.
+
+Encontré un libro sobre fotografía elemental, escrito en 1893, que afirmaba que  
+“el revelado de la imagen fotográfica es tanto un arte como una ciencia.”  
+De hecho, cuando tomé un diccionario para estudiar las palabras “arte” y “ciencia”,  
+casualmente miré el prefacio del editor, que comenzaba diciendo:  
+> “La elaboración de un diccionario es tanto una ciencia como un arte.”
+
+El editor del diccionario de Funk & Wagnalls observó que la meticulosa recopilación y clasificación de datos sobre palabras  
+tiene un carácter científico, mientras que una redacción cuidadosamente elegida de las definiciones  
+requiere la habilidad de escribir con precisión y economía:
+
+> “La ciencia sin el arte probablemente será ineficaz; el arte sin la ciencia ciertamente será inexacto.”
+
+Mientras preparaba esta charla, revisé el catálogo de fichas de la biblioteca de Stanford  
+para ver cómo otras personas han utilizado las palabras “arte” y “ciencia” en los títulos de sus libros.  
+El resultado fue bastante interesante.
+
+Por ejemplo, encontré dos libros titulados *El arte de tocar el piano*,  
+y otros llamados *La ciencia de la técnica del pianoforte* y *La ciencia de la práctica del pianoforte*.  
+También hay un libro titulado *El arte de tocar el piano: un enfoque científico*.  
+Después encontré un pequeño libro encantador titulado *El arte gentil de las matemáticas*,  
+lo cual me entristeció un poco, porque no puedo describir honestamente la programación de computadoras como un “arte gentil”.
+
+Durante años había sabido de un libro titulado *El arte del cálculo*, publicado en San Francisco en 1879  
+por un hombre llamado C. Frusher Howard. Era un libro sobre aritmética comercial práctica que había vendido  
+más de 400,000 copias en varias ediciones hacia 1890. Me hizo gracia leer el prefacio,  
+pues mostraba que la filosofía de Howard y la intención de su título eran bastante distintas de las mías; escribió:
+
+> “Un conocimiento de la ciencia de los números es de importancia menor;  
+> la destreza en el arte de calcular es absolutamente indispensable.”
+
+Varios libros mencionan tanto la ciencia como el arte en sus títulos,  
+notablemente *La ciencia del ser y el arte de vivir*, de Maharishi Mahesh Yogi.  
+También encontré un libro titulado *El arte del descubrimiento científico*,  
+que analiza cómo se hicieron algunos de los grandes descubrimientos de la ciencia.
+
+Hasta aquí, hemos hablado del término “arte” en su significado clásico.  
+Sin embargo, cuando elegí el título de mis libros, no estaba pensando principalmente en ese sentido,  
+sino más bien en sus connotaciones actuales. Probablemente el libro más interesante que surgió en mi búsqueda  
+fue una obra relativamente reciente de Robert E. Mueller, titulada *La ciencia del arte*.  
+De todos los libros que he mencionado, el de Mueller es el que más se acerca a expresar  
+lo que quiero hacer el tema central de esta charla, en términos de la **verdadera expresión artística**,  
+tal como la entendemos hoy. Él observa:
+
+> “Alguna vez se pensó que la visión imaginativa del artista era la muerte para el científico.  
+> Y la lógica o la ciencia parecían condenar cualquier posible vuelo artístico de la fantasía.”
+
+Luego explora las ventajas que realmente resultan de una síntesis entre ciencia y arte.  
+Un enfoque científico se caracteriza generalmente por palabras como lógico, sistemático, impersonal, calmado, racional;  
+mientras que un enfoque artístico se caracteriza por palabras como estético, creativo, humanitario, ansioso, irracional.  
+Me parece que ambos enfoques, aunque aparentemente contradictorios, tienen un **gran valor** en el contexto de la programación de computadoras.
+
+Emma Lehmer escribió en 1956 que había descubierto que la codificación era  
+“una ciencia exigente, así como un arte intrigante.”  
+H.S.M. Coxeter comentó en 1957 que a veces se sentía  
+“más como un artista que como un científico.”  
+Esto fue en la época en que C.P. Snow comenzaba a expresar su preocupación  
+por la creciente polarización entre las “dos culturas” de las personas educadas.  
+Él señalaba que necesitábamos **combinar los valores científicos y artísticos** si queríamos lograr un verdadero progreso.
+
+## Obras de Arte {.unnumbered .unlisted}
+
+Cuando estoy sentado en una audiencia escuchando una conferencia larga, mi atención normalmente comienza a disminuir más o menos en este punto de la hora.  
+Así que me pregunto: ¿ustedes ya están un poco cansados de mi discurso sobre “ciencia” y “arte”?  
+De todos modos, realmente espero que puedan seguir prestando atención a lo que queda,  
+porque ahora viene la parte que siento con mayor profundidad.
+
+Cuando hablo de la programación de computadoras como un arte,  
+estoy pensando principalmente en ella como una **forma artística**, en un **sentido estético**.  
+El objetivo principal de mi trabajo como educador y autor es ayudar a las personas a **aprender a escribir programas hermosos**.  
+Es por esta razón que me complació especialmente saber recientemente que mis libros  
+en realidad se encuentran en la Biblioteca de Bellas Artes de la Universidad de Cornell.  
+(Sin embargo, los tres volúmenes aparentemente están bien alineados en la estantería, sin ser usados,  
+así que temo que los bibliotecarios hayan cometido un error al interpretar mi título de forma literal).
+
+Mi sentimiento es que, cuando preparamos un programa, puede ser como componer poesía o música;  
+como dijo Andrei Ershov, **programar puede darnos satisfacción tanto intelectual como emocional**,  
+porque es un verdadero logro dominar la complejidad y establecer un sistema de reglas coherentes.
+
+Además, cuando leemos programas escritos por otras personas, podemos reconocer algunos de ellos como verdaderas **obras de arte**.  
+Todavía recuerdo la gran emoción que sentí al leer la lista del programa ensamblador SOAP II de Stan Poley en 1958;  
+probablemente pensarán que estoy loco —y ciertamente los estilos han cambiado mucho desde entonces—,  
+pero en ese momento significó mucho para mí ver cuán elegante podía ser un programa de sistema,  
+especialmente en comparación con el estilo torpe de codificación que encontré en otros listados que estaba estudiando al mismo tiempo.  
+
+La posibilidad de escribir **programas hermosos**, incluso en lenguaje ensamblador,  
+fue lo que me **enganchó** a la programación en primer lugar.  
+Algunos programas son elegantes, otros son exquisitos, otros brillan.  
+Mi afirmación es que **es posible escribir programas grandiosos, nobles, verdaderamente magníficos**.
+
+## Gusto y Estilo {.unnumbered .unlisted}
+
+La idea de **estilo en la programación** está comenzando por fin a ocupar un lugar destacado,  
+y espero que la mayoría de ustedes haya visto el excelente librito *Elements of Programming Style*, de Kernighan y Plauger.  
+En este contexto, es muy importante que todos recordemos que **no hay un único “mejor” estilo**;  
+cada persona tiene sus propias preferencias, y es un error intentar forzar a alguien dentro de un molde artificial.  
+A menudo oímos decir: “No sé nada de arte, pero sé lo que me gusta.”  
+Lo importante es que **realmente te guste el estilo que estás usando**;  
+debe ser la mejor forma de expresar lo que deseas transmitir.
+
+Edsger Dijkstra enfatizó este punto en el prefacio de su *Short Introduction to the Art of Programming*:
+
+> “Mi propósito es transmitir la importancia del buen gusto y el estilo en la programación,  
+> [pero] los elementos específicos de estilo presentados solo sirven para ilustrar los beneficios que pueden derivarse del concepto general de ‘estilo’.  
+> En este sentido me siento como un profesor de composición en un conservatorio:  
+> él no enseña a sus alumnos cómo componer una sinfonía en particular,  
+> sino que debe ayudarlos a encontrar su propio estilo y explicarles lo que eso implica.”
+
+(Esta analogía fue la que me llevó a hablar del “Arte de Programar”).
+
+Ahora debemos preguntarnos: ¿Qué es un buen estilo y qué es un mal estilo?  
+No deberíamos ser demasiado rígidos al juzgar el trabajo de otras personas.  
+El filósofo del siglo XIX Jeremy Bentham lo expresó así:
+
+> “Los jueces de la elegancia y el gusto se consideran benefactores de la raza humana,  
+> cuando en realidad solo están interrumpiendo su placer...  
+> No hay gusto que merezca el calificativo de *bueno* a menos que sea el gusto por ocupaciones  
+> que, además del placer que producen, conlleven alguna utilidad futura o potencial;  
+> no hay gusto que deba calificarse como *malo* a menos que sea el gusto por ocupaciones  
+> que tienden a tener un efecto perjudicial.”
+
+Cuando aplicamos nuestros propios prejuicios para “reformar” el gusto de otra persona,  
+podemos estar negándole —sin saberlo— un placer totalmente legítimo.  
+Por eso no condeno muchas de las cosas que hacen los programadores,  
+aunque yo nunca las haría. **Lo importante es que estén creando algo que consideran hermoso.**
+
+En el pasaje que acabo de citar, Bentham también nos ofrece un consejo sobre ciertos principios estéticos  
+que son mejores que otros, a saber, la **utilidad** del resultado.  
+Tenemos cierta libertad para establecer nuestros estándares personales de estilo,  
+pero es especialmente valioso cuando las cosas que consideramos bellas también son consideradas **útiles** por otras personas.  
+
+Debo confesar que realmente disfruto escribir programas de computadora;  
+y en particular, disfruto escribir programas que **hacen el mayor bien posible**, en algún sentido.
+
+Hay muchos sentidos en los que un programa puede ser “bueno”, por supuesto.  
+En primer lugar, es especialmente bueno que un programa **funcione correctamente**.  
+En segundo lugar, a menudo es bueno que un programa **sea fácil de modificar**, cuando llegue el momento de adaptarlo.  
+Ambos objetivos se logran cuando el programa es **fácilmente legible y comprensible** para una persona que conoce el lenguaje adecuado.
+
+Otra forma importante en que un programa de producción puede ser bueno es si **interactúa de forma agradable con sus usuarios**,  
+especialmente al recuperarse de errores humanos en los datos de entrada.  
+Componer mensajes de error útiles o diseñar formatos de entrada flexibles que no induzcan al error  
+es un verdadero arte.
+
+Otro aspecto importante de la calidad de un programa es la **eficiencia con la que utiliza los recursos del computador**.  
+Lamento decir que mucha gente hoy en día **desprecia la eficiencia**, diciendo que está “pasada de moda”.  
+La razón de esto es que estamos viviendo una reacción ante la época en que **la eficiencia era el único criterio válido de calidad**,  
+y los programadores del pasado solían estar tan obsesionados con ella que producían código innecesariamente complejo;  
+el resultado de esa complejidad fue que la **eficiencia neta disminuyó**, debido a las dificultades en la depuración y el mantenimiento.
+
+El verdadero problema es que los programadores **han dedicado demasiado tiempo a preocuparse por la eficiencia en el lugar equivocado y en el momento equivocado**.  
+La **optimización prematura es la raíz de todos los males** (o al menos de la mayoría) en programación.  
+No deberíamos ser “cuidadosos en lo pequeño e imprudentes en lo grande”;  
+ni tampoco deberíamos pensar siempre en eficiencia en términos de tantos por ciento ganados o perdidos en tiempo de ejecución o espacio.
+
+Cuando compramos un coche, muchos de nosotros apenas notamos una diferencia de 50 o 100 dólares en el precio,  
+pero podríamos hacer un viaje especial a una tienda para comprar algo de 50 centavos por solo 25 centavos.  
+Mi punto es que **hay un tiempo y un lugar adecuados para la eficiencia**;  
+he discutido su papel apropiado en mi artículo sobre programación estructurada,  
+el cual aparece en el número actual de *Computing Surveys*.
+
+## Menos facilidades: Más disfrute {.unnumbered .unlisted}
+
+Otra cosa que me gustaría decir sobre el arte de la programación de computadoras es que **no siempre se disfruta más cuanto mejores son las herramientas**.  
+A veces es divertido **limitarse** a un entorno restringido.
+
+Recuerdo con cariño los días de 1958, cuando pasaba tardes enteras escribiendo programas para un IBM 650,  
+una máquina primitiva en comparación con las computadoras actuales.  
+Pero esa máquina tenía un **cierto encanto**, y además representaba una **nueva frontera**;  
+había mucho que explorar.  
+Estábamos descubriendo nuevas técnicas cada semana;  
+y hoy en día, aunque ahora se sabe mucho más, todavía me encuentro escribiendo programas para el 650,  
+con fines educativos y por pura diversión.
+
+Hago esto ahora con un simulador de la máquina IBM 650, y es muy satisfactorio trabajar en ese ambiente.  
+Hay una **especie de arte popular** en escribir código en lenguaje de máquina para computadoras antiguas,  
+y no quiero que se pierda del todo.  
+Al igual que los constructores de instrumentos musicales antiguos, o los calígrafos medievales,  
+**disfrutamos de nuestras herramientas modestas**.  
+Es como construir con nuestras propias manos.
+
+Las herramientas modernas y los entornos de desarrollo avanzados son maravillosos, y es cierto que nos hacen **más productivos**;  
+pero en algunos casos, **la abundancia de herramientas puede disminuir el ingenio**.  
+Con frecuencia, las mejores soluciones surgen cuando tenemos **restricciones**:  
+de tiempo, de memoria, de procesador o de lenguaje.
+
+Así que no pensemos que una programación verdaderamente artística requiere los entornos de más alto nivel,  
+los compiladores más sofisticados o los recursos más poderosos.  
+**El arte puede florecer en condiciones modestas**, y a veces se disfruta más así.
+
+Lo que realmente importa es **cómo pensamos** cuando programamos.  
+Como dijo Barbara Tuchman sobre el arte de escribir historia:
+
+> “No hay ningún secreto, excepto esto: el pensamiento claro produce buena prosa.  
+> No hay sustituto para pensar. Ningún truco, ningún artefacto, ningún proceso editorial  
+> puede tomar el lugar del pensamiento.”
+
+Yo diría lo mismo sobre el arte de programar: **no hay atajo que sustituya el pensar cuidadosamente** sobre lo que queremos lograr.
+
+Así que el arte de programar consiste en combinar tanto el pensamiento técnico como el gusto estético  
+para crear algo útil, eficiente y bello.  
+Y ese proceso, al igual que en otras artes, puede ser inmensamente **gratificante**.
+
+## Conclusión {.unnumbered .unlisted}
+
+Permítanme concluir esta charla con una analogía.  
+La mayoría de nosotros hemos aprendido a escribir durante nuestra infancia, y sabemos que escribir es una habilidad esencial.  
+Sin embargo, no todos los que saben escribir se convierten en autores de literatura.  
+Del mismo modo, no todos los que escriben programas se convierten en grandes programadores.  
+Existe una diferencia entre **escribir para comunicar una idea funcional** y **escribir con maestría, con estilo y elegancia**.
+
+En la literatura, reconocemos que hay autores prolíficos, escritores técnicos, poetas, ensayistas, dramaturgos...  
+y cada uno desarrolla una **voz propia**, un estilo característico.  
+La programación no es diferente.  
+Podemos escribir código que simplemente funcione,  
+o podemos escribir código que sea **estructurado, claro, eficiente y elegante**,  
+código que inspire a otros, que sea un modelo de pensamiento claro y diseño inteligente.
+
+Mi esperanza es que los programadores —presentes y futuros—  
+consideren lo que hacen como algo más que ingeniería o solución de problemas.  
+Deseo que vean la **belleza en un algoritmo bien diseñado**,  
+el **ritmo en una estructura de control bien escrita**,  
+la **elegancia en una solución inesperadamente simple**,  
+la **satisfacción** de haber creado algo **duradero, útil y armónico**.
+
+Así que, aunque es cierto que debemos trabajar para que la programación sea cada vez más científica —más rigurosa y comprensible—,  
+también debemos preservar y fomentar su lado artístico.  
+Porque **la programación de computadoras es, y debe seguir siendo, un arte**.
+
+
+
+

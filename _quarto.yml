@@ -6,6 +6,7 @@ book:
   author: "Julio Rivas"
   chapters:
      - index.qmd
+     - chapters/foundations.qmd
      - chapters/conceptos.qmd
      - chapters/organizacion.qmd
      - chapters/principios.qmd
@@ -13,6 +14,7 @@ book:
      - references.qmd
   appendices: 
     - chapters/appendix/license_cc.qmd
+    - chapters/appendix/e_mc2.qmd    
     - chapters/appendix/irr_algo.qmd    
     
 bibliography: references.bib
@@ -27,7 +29,7 @@ format:
     papersize: a4
     toc-title: Indice
     toc: true
-    toc-depth: 4
+    toc-depth: 3
     number-sections: true
 
 
