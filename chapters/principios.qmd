@@ -1,4 +1,13 @@
 ---
-title: "Principios de diseño"
+title: "Axiomas, principios y leyes"
 ---
 
+## Acerca de 
+
+Esta es la lista de principios, leyes, cosas, etc.
+
+{{< include principios/axiomas.qmd >}}
+{{< include principios/leyes.qmd >}}
+{{< include principios/design.qmd >}}
+{{< include principios/development.qmd >}}
+{{< include principios/systems.qmd >}}
