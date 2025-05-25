@@ -4,6 +4,7 @@
 .Ruserdata
 
 .bak
+**/*.dll
 
 /.quarto/
 /_book/**
