@@ -1,0 +1,122 @@
+### PDvvmmm Cada dato tiene su tipo 
+
+Los SGDB contemplan un conjunto de tipos de datos básicos para almacenar su información.
+
+La primera pregunta que te deberías hacer es: ¿Por qué hay diferentes tipos? y la respuesta es inmediata:
+"**Si los hay será por algo**"
+
+```{r, evaluate=TRUE, echo=FALSE}
+
+nombres = c("TINYINT", "SMALLINT", "INTEGER", "BIT", "LONG", "BIGINT", "FLOAT", "DOUBLE", "DECIMAL(M,D)")
+sizes   = c(1, 2,4,4,8,16,4,8,8)
+maximo  = c(255, 65535,4294967295, "N/A", 18446744073709551615, 18446744073709551615, 3.402823466E+38, 1.7976931348623157E+308, "M+2")
+
+dfNumbers = data.frame(nombres,sizes,maximo)
+knitr::kable(dfNumbers)
+```
+
+
+##### Flags, Switches y bits {.unlisted .unnumbered}
+
+Vamos a hacer una pequeña parada para aclarar algunos conceptos:
+
+- **Switch**: Es un campo que solo puede tener dos valores (un biestable) y **entidad propia**; es decir, 
+en principio existe independientemente de otros switches, valores, etc. Puesto que solo puede tener dos valores,
+suele ser práctica común representarlo como 0 (desactivado) y 1 (activado)
+- **Flag**: Es un **indicador** que referencia la activación o no de alguna característica o atributo, la cual, normalmente, está relacionada con otras características relacionadas. Es similar a un switch en el sentido de que solo tiene dos estados: activo/inactivo
+- **BIT**: Para aquellos que no se hayan fijado, es un tipo de dato primitivo de la base de datos, 
+del mismo tamaño que un INTEGER, pero a diferencia de este, sin valor máximo _¿curioso ¿eh?_
+
+**Principios de diseño**
+
+Vamos a ello:
+
+1. Un **switch** se modela en un campo de tipo **TINYINT** que permite dos valores: 0 y 1
+2. Un **flag** se modela como "_un elemento_" de un campo de tipo **BIT** junto con el resto de _flags_ relacionados
+3. **Si el campo BIT existe, ¡usalo!**
+
+#### Casos de uso
+
+Como siempre, estos son ejemplos reales
+
+1. Campo ST_WIN de tipo VCHAR(1), sin mas información los datos existentes en la base de datos son dos: 'O' y 'F'
+   1. ¿Eres capaz de decir, con solo esa información, que significa ese campo?
+   2. ¿Te atreverías a poner otro valor: 'x', 'f' o 'pepe'?
+   3. Explicación: Ese campo indicaba si estaba activada o no una ventana de ejecución en un software francés
+   4. Explicación 2: Internamente implica 3 bytes en base de datos, comparacion alfanumerica, intorelancia a mayusculas/minusculas, etc.
+   
+
+
+Tenemos un sistema que envía notificaciones a sus clientes/usuarios de ciertos eventos. 
+Estos indican sus preferencias de manera única o exclusiva, por ejemplo, un usuario ha dicho:
+
+1. wassapp
+2. SMS
+3. correo
+4. fax
+
+Es decir:
+
+1. Primero intenta wassapp, si no tengo datos o no tengo activo, usa la siguiente opcion
+2. Si no hay datos, usa el SMS
+3. Si no hay cobertura, intenta por correo electronico
+4. Si el buzón está lleno, mandame un Fax
+
+Aparte de lo "enrevesado" del caso, entendemos que podría ser perfectamente factible, es mas, con el 
+tiempo se podrían añadir otros medios de comunicación no contemplados todavia o no implementados (¿quien te iba a decir a ti, hace poco tiempo, que tu estado se comunicaría contigo a través de Wassapp o wechat, y tendría consideraciones legales, eh?)
+
+Una implementación de esta funcionalidad fue:
+
+1. Creamos 4 campos de tipo INTEGER: IND_WASSAPP, IND_SMS, IND_MAIL, IND_FAX en la base de datos
+2. Los inicializamos a 0
+3. Programamos el siguiente pseudocodigo:
+
+```
+SELECT * FROM XXXX
+IF IND_WASSAPP == 1 THEN
+        RC = proceso_wassapp
+   ELSE IF IND_SMS == 1 THEN
+             RC = proceso_sms
+        ELSE IF   IND_MAIL == 1 THEN
+                  RC = proceso_mail
+             ELSE IF IND_FAX == 1
+                     RC = proceso_fax
+                  END-IF      
+            END-IF      
+        END-IF
+        
+   END-IF
+END-IF
+```
+
+Un analisis somero de esto es:
+
+1. Practicamente ilegible. Una anidacion de 4 IFs
+2. No se controla el caso de error en un canal prioritario
+3. Asumimos, y es mucho asumir, que los valores son siempre 0 o 1
+4. Hemos modificado una base de datos **EN PRODUCCION** para incluir esos campos. Esto no es trivial
+5. A cada registro le hemos sobrecargado con 16 bytes mas de datos, que siempre tendra que procesar/cargar
+6. Solo contemplo los casos actuales, como se cambien, añadan o eliminen, debo modificar tanto BBDD como código
+
+
+
+```
+# Constantes definidas en un UNICO sitio
+CANAL_WASSAPP =  2
+CANAL_SMS     =  4
+CANAL_MAIL    =  8
+CANAL_FAX     = 16
+
+hecho = FALSE
+canal = 1
+
+SELECT FLG_CANALES FROM XXXX
+Mientras no hecho
+º   IF Obten_canal_proceso (canal <<= 1).ejecuta-proceso == OK hecho = TRUE
+...   
+
+```
+
+
+
+

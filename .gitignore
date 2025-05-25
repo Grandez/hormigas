@@ -3,5 +3,7 @@
 .RData
 .Ruserdata
 
+.bak
+
 /.quarto/
 /_book/**

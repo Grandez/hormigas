@@ -1,0 +1,131 @@
+
+## Acerca de
+
+Para aquellos no muy puestos en matemáticas, y de manera informal, podemos decir que un fractal es una
+función matemática que presenta **autosimilitud**. 
+
+¿Qué significa _autosimilaridad_?: Que, independientemente del nivel de detalle que usemos, la estructura es similar; 
+o dicho de otro modo, que siempre presenta un patrón similar, que no igual.
+
+Los fractales se suelen asociar a la conocida como "_matemática del caos_", pero de caos tiene poco o nada,
+y sí mucho de estructura y de organización; posiblemente, esta asociación sea debida a que cambios muy pequeños en 
+la estructura tienen un impacto muy grande en la globalidad.
+
+## La organización fractal
+
+Una vez hecha esa introducción, echemos un vistazo a esta figura:
+
+```{r sierpinski, echo=F} 
+sierpinski = function(x, y, size, depth, max_depth) {
+    color <- colorRampPalette(c("green", "blue"))(max_depth + 1)[depth + 1]
+    
+    polygon(
+      x = c(x, x + size / 2, x - size / 2),
+      y = c(y, y - size * sqrt(3)/2, y - size * sqrt(3)/2),
+      col = color,
+      border = NA
+    )
+   if (depth > 0) {   
+    sierpinski(x, y, size / 2, depth - 1, max_depth)
+    sierpinski(x - size / 4, y - size * sqrt(3)/4, size / 2, depth - 1, max_depth)
+    sierpinski(x + size / 4, y - size * sqrt(3)/4, size / 2, depth - 1, max_depth)
+  }
+}
+
+# Crear lienzo
+plot(NA, xlim = c(-1, 1), ylim = c(-1.7, 0), asp = 1, xaxt = "n", yaxt = "n", xlab = "", ylab = "", bty = "n")
+
+max_depth = 6
+sierpinski(0, 0, 2, max_depth, max_depth)
+
+``` 
+
+
+Si estamos hablando de organizaciones, ¿Qué estamos viendo? ***El típico triangulo de una estructura jerárquica empresarial*** (Cierto que podría haberle dado una estructura de colores horizontal que lo hiciera mas evidente), 
+para el que tenga curiosidad, esa función es un fractal que se llama: _triangulo de sierpinski_ y se obtiene a partir de un único triangulo.
+
+Antes de que alguien comente acerca de las estructuras matriciales, cúbicas e hipercúbicas de las organizaciones
+modernas, permítaseme recordarle que esas estructuras se llaman EJES, diferentes visiones de la misma información. Siguiendo con los símiles matemáticos, un cuadrado es una estructura de dos dimensiones/ejes, un cubo en un 
+conjunto de cuadrados que tiene tres dimensiones, un hipercubo en un conjunto de cubos que tiene cuatro dimensiones, y asi sucesivamente, de un hipercubo obtenemos cubos y de un cubo obtenemos cuadrados, de manera que
+la estructura sea manejable (principio divide y vencerás).
+
+
+### El patron organizativo
+
+Antes de explicar el patrón básico damos por asumido los siguientes axiomas económicos
+
+- La economia es la ciencia/arte de xxxx con unos recursos limitados
+- El objetivo de una organización es maximizar el beneficio/utilidad de la misma
+- La organizacion
+
+
+![Patron base](img/organizacion.png)
+
+
+Si seguimos subiendo en la pirámide, al final nos encontraremos basicamente con el mismo patrón, 
+solo que con otros nombres:
+
+![Direccion](img/organizacion_2.png)
+
+
+- CEO: Chief Executive Officer
+- CFO: Chief Financial Officer, el que gestiona el dinero que permite el negocio
+- CIO: Chief Information Officer, el que gestiona las herramientas que permiten el negocio
+- CxO: Chief de otras areas productivas y no productivas pero necesarias para el negocio
+
+
+Antes de explicar el patrón básico damos por asumido los siguientes axiomas economicos
+
+
+::: columns
+::: {.column width="30%"} 
+columna izquierda
+:::
+::: {.column width="53%"} 
+El triángulo de Sierpinski es un fractal autosimilar: cada sub-triángulo es una copia reducida del original.
+Aparece en teoría de grafos, topología y compresión de imágenes.
+En la figura se muestran seis niveles de recursión, lo que deja más de 700 triángulos huecos.
+:::
+:::
+
+Aqui partimos las columnas
+
+::: columns
+::: {.column width="30%"} 
+```{r fig, echo=F} 
+sierpinski = function(x, y, size, depth, max_depth) {
+    color <- colorRampPalette(c("green", "blue"))(max_depth + 1)[depth + 1]
+    
+    polygon(
+      x = c(x, x + size / 2, x - size / 2),
+      y = c(y, y - size * sqrt(3)/2, y - size * sqrt(3)/2),
+      col = color,
+      border = NA
+    )
+   if (depth > 0) {   
+    sierpinski(x, y, size / 2, depth - 1, max_depth)
+    sierpinski(x - size / 4, y - size * sqrt(3)/4, size / 2, depth - 1, max_depth)
+    sierpinski(x + size / 4, y - size * sqrt(3)/4, size / 2, depth - 1, max_depth)
+  }
+}
+
+# Crear lienzo
+plot(NA, xlim = c(-1, 1), ylim = c(-1.7, 0), asp = 1, xaxt = "n", yaxt = "n", xlab = "", ylab = "", bty = "n")
+
+max_depth = 6
+sierpinski(0, 0, 2, max_depth, max_depth)
+
+``` 
+:::
+::: {.column width="53%"} 
+El triángulo de Sierpinski es un fractal autosimilar: cada sub-triángulo es una copia reducida del original.
+Aparece en teoría de grafos, topología y compresión de imágenes.
+En la figura se muestran seis niveles de recursión, lo que deja más de 700 triángulos huecos.
+:::
+:::
+
+Posiblemente 
+Este gráfico muestra la relación entre la velocidad y la distancia de frenado de los vehículos. Observamos una tendencia creciente, lo cual es esperable: a mayor velocidad, se necesita más distancia para frenar.
+
+Este tipo de representación es útil en análisis exploratorio de datos cuando se quiere entender correlaciones entre variables numéricas.
+

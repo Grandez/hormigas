@@ -1,0 +1,25 @@
+---
+title: "Untitled"
+author: "Grandez"
+date: "2025-05-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## nada
+
+Ejecuto
+
+```{r, engine='c', echo=TRUE}
+#include <stdio.h>
+
+int main() {
+  printf("¡Hola desde C en Quarto!\n");
+  return 0;
+}
+```
+
+resultado

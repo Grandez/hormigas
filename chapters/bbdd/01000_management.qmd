@@ -1,0 +1,6 @@
+## Modelo de datos empresarial
+
+aqui la empresa
+
+{{< include bbdd/01001_dato.qmd >}}
+{{< include bbdd/01002_diccionario.qmd >}}

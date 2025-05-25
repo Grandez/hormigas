@@ -2,5 +2,6 @@
 {{< include chapters/00_previo/01_license.qmd >}}
 {{< include chapters/00_previo/02_forewords.qmd >}}
 {{< include chapters/00_previo/03_abstract.qmd >}}
+{{< include chapters/00_previo/10_definiciones.qmd >}}
 {{< include chapters/00_previo/99_toc.qmd >}}
 

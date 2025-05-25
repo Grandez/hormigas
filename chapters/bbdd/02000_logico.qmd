@@ -1,0 +1,4 @@
+## Modelo de datos lógico
+
+### DP_bbdd_mmm El modelo lógico **NO ES** el modelo físico
+

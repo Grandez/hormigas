@@ -1,0 +1,182 @@
+---
+title: "Claves compuestas"
+author: "Grandez"
+date: "2025-04-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Acerca de las claves
+
+Cualquier ordenador basado en una arquitectura Von Neumman utiliza bits, los cuales representan números, con o sin signo, logicamente, si queremos efectividad, deberiamos usar numeros tambien como claves
+
+Obviando muchas cosas, tenemos una clave: 123 y buscamos esta clave
+
+```
+CMP R1,R2
+BZ   OK
+JMP  NOK
+:OK
+MOV 0,AL     Lo ha encontrado
+RET 
+:NOK         No lo ha encontrado 
+MOV AC, AX
+...
+RET
+
+```
+
+Ahora tenemos la clave "AbC" y hacemos la misma búsqueda (En pseudocódigo para no extendernos)
+
+```
+ADDR1 -> "AbC"
+ADDR2 -> "AbC"
+
+IDX1 = 0
+IDX2 = 0
+
+MOV .ADDR1[.IDX1], R1
+MOV .ADDR2[.IDX2], R2
+
+:BEG
+mientras R1 != 0x0 y R2 != 0x0
+  CMP R1,R2
+  BNZ  NOK
+  INC IDX1
+  INC IDX2
+  MOV .ADDR1[.IDX1], R1
+  MOV .ADDR2[.IDX2], R2
+
+BZ R1, 0X00, CR2
+B  NOK
+
+:CR2
+BZ R2, 0X00, OK
+B NOK
+
+:OK
+MOV 0, AL
+RET
+
+:NOK    No son iguales
+...
+MOV CX, AX
+RET
+...
+```   
+
+
+Tenemos un numero de registros `n`, los cuales pueden almacenarse como una clave única o una clave compuesta de tres campos
+
+$$
+ \begin{align}
+  O(n) &= \log_2(n) \\
+  \exists x,y,z  |  x * y * z &= n \\
+  \log_2(n) &= \log_2(x)+ \log_2(y) + \log_2(z) \\
+  \exists! x',y',z'  |  x' * y' * z' &<= n \\
+  \exists x',y',z'   |  x' * y' * z' &< n  (para algun x, y o z)\\
+  Luego \log_2(n) &> \log_2(x')+ \log_2(y') + \log_2(z') \\
+  \end{align}
+$$ 
+
+Supongamos n = 64 registros, numéricos, cuya clave numérica esta compuesta de tres campos, por ejemplo:
+
+- Año de dos bytes
+- Id de cierto grupo de cuatro bytes
+- Un secuencial asociado al grupo de 6 bytes
+
+Por ejemplo:
+
+- 250123000123
+- 240256123456
+- y asi hasta 64
+
+Es un valor numérico y único
+
+El coste **peor** de encontrar un registro es:
+
+$ log_2(64) = 6 $
+
+Hemos supuesto una clave de tres campos; es decir, tenemos, y podemos, factorizar ese número en otros tres números, tenemos 4 casos "_peores_"
+
+1. 64 * 1 * 1
+2. 1  * 64 * 1
+3. 1 * 1 * 64
+4. 4 * 4 * 4
+
+Que se corresponden con:
+
+1. Durante 64 años solo un grupo grabo un registro
+2. Solo en un año 64 grupos grabaron un registro
+3. Solo en un año, un grupo grabo algo: 64 registros
+4. El peor caso, distribución homogenea
+
+Ademas de otras factorizaciones posibles:
+
+- 8 * 8 * 1
+- 4 * 2 * 8
+- 2 * 32 * 1
+- ....
+
+
+Recordemos tambien que $log_2(1) = 0$ asi que los primeros casos extremos no importan, es el caso "igual"
+
+La situación real, es que es altamente improbable (posible, pero altamente improbable) que todos los registros esten uniformemente distribuidos; caso 4 * 4 * 4, luego para un determinado registro, salvo en ese caso extremo, existirá un x o y o z que será menor de 4 y por lo tanto **nunca sera peor** segmentar la clave.
+
+Ejemplo:
+Segmentamos la clave en: periodo + grupo + secuencial
+
+02/01/26. Un organo graba un registro, el 65: 260323000001 o segmentado: 26 + 0323 + 000001
+
+El coste medio de la clave antigua es constante $\log_2(65) / 2$
+
+El coste con la nueva clave es $\log(1) + \log(1) + \log(1) = 0$
+
+Nota: De acuerdo con las normas, la constante oculta _k_ se ha ignorado
+
+## Casos de uso
+
+### CCC
+
+Un código CCC es un codigo numérico de 20 dígitos que está formado por subcampos
+
+| Banco | oficina | CC | Prod | Subprod | secuencial |
+|-------| ------- |----|------|---------|------------|
+|nnnn   | oooo    | cc | pp   | tt      | ssssss |
+
+
+¿Como lo almacenan las entidades financieras en sus bases de datos?
+
+**¡Como campos independientes!**, incluyendo o no el campo CC por que **es un campo calculado**
+
+### Otro caso
+
+En mucho sistemas se sigue un proceso similar a este, supongamos
+
+| Prefijo      | Año    | atributo   | delegacion | secuencial |
+|--------------| ------- |-----------|------|-------------|
+| texto fijo   | aa      | una letra | oooo   | ssssssss |
+
+En este caso, el identificador único es un conjunto de número y letras, por lo que deberíamos 
+almacenarlo como una cadena de caracteres, salvo:
+
+- El texto fijo, según Shannon, lo que no aporta información se llama ruido; es decir, no necesitamos 
+esa información en la base de datos por que es fija y calculable
+- El atributo, una letra, por definición, tambien es un número, asi que se puede convertir a el 
+simplemente dandole su valor numérico
+
+Y ya tenemos una clave compuesta con datos puramente numéricos.
+
+¿Como lo almacenan las entidades financieras en sus bases de datos?
+
+**¡Como campos independientes!**, incluyendo o no el campo CC por que **es un campo calculado**
+
+
+
+
+
+
+

@@ -2,4 +2,9 @@
 title: "Modelo de datos"
 ---
 
-Sobre el modelo de datos
+En esta sección abordaremos el interesante asunto de modelar y diseñar bases de datos relacionales
+
+{{< include bbdd/01000_management.qmd >}}
+{{< include bbdd/02000_logico.qmd >}}
+{{< include bbdd/03000_fisico.qmd >}}
+

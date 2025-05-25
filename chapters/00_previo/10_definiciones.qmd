@@ -1,0 +1,113 @@
+# Definiciones y conceptos
+
+Este librose manejan las siguientes definiciones y conceptos (por orden
+de aparición):
+
+```{r, echo=FALSE }
+library(dplyr)
+library(kableExtra)
+
+definiciones = list( 
+    c("tailoring", "El hecho de ajustar algo")
+   ,c("SGSI", "Sistema de Seguridad de la Informacion")
+)
+
+df = do.call(rbind.data.frame, definiciones)
+colnames(df) = c("Definición", "Descripción")
+
+df[,1] = paste0(df[,1], "{@", df[,1], "}")
+   
+kbl(df) %>% kable_paper(full_width = T) %>% column_spec(1, bold=T)
+```
+
+
+## Tailoring {#tailoring}
+
+Tailoring es un concepto tomado del mundo de la costura y hace
+referencia a que prácticamente nada es *out-of-the-box*, o dicho de otro
+modo, la capacidad propia para, dado un procedimiento, un proceso, una
+metodología, un artefacto, ajustarlo a la medida de nuestras necesidades
+
+
+### Ejemplo 1 {.unnumbered .unlisted}
+
+En el negocio de la costura, como en tantos otros, alguien diseña algo,
+en su negocio digamos un vestido, un traje, etc. Y solo hace uno, el que
+expone al público, lo que llamaríamos **una implementación**.
+
+En el mundo real eso se traduce (vende) como un patrón:
+
+A)  Un listado detallado de materiales y cantidades
+B)  Unos papeles con un conjunto de etiquetas en ellos y unas líneas
+    dibujadas, posiblemente, ninguna recta ni "matemáticamente" simple
+
+Cualquier otro profesional puede comprar ese patrón, el cual es
+correcto, si no perfecto, para unas determinadas condiciones asociadas a
+la persona para la que se implementó: Altura, anchura, color de piel,
+pelo, ....
+
+Este profesional:
+
+1.  Coge el listado de materiales: "Seda salvaje de la indochina" y lo
+    sustituye por otro material (todos sabemos lo que cuesta la seda
+    salvaje de la indochina), lo cual abarata el coste, pero también
+    afecta al conjunto global del vestido: "¿Como vas a comparar la
+    caida y ligereza de una seda salvaje de la indochina con otras
+    cosas?
+2.  Su clienta, muy probablemente, no tenga las medidas exactas de la
+    modelo para el que se hizo el vestido. Asi que manteniendo las
+    líneas originales, va realizando ajustes proporcionales
+3.  El vestido es muy complejo, si prefieres, completo, pero mi clienta
+    no necesita ciertos abalorios y complementos. Manteniendo el patrón
+    y sus relaciones, el sastre va retocando/eliminando cosas del patrón
+4.  El hecho de eliminar, altera el patrón, por ejemplo, el vestido
+    lleva ciertos adornos de flores frescas que son inviables en mi
+    caso, pero necesarias para el conjunto, lo cambio por algo similar y
+    mas barato
+
+Resultado: El vestido de la modelo y el de tu cliente son
+conceptualmente equivalentes, el mismo efecto y el mismo resultado, uno
+es adecuado para ir a la fiesta de la rosa en Monaco, el otro tambien
+podría, pero es mas adecuado para una boda de postín.
+
+### Ejemplo 2 {.unnumbered .unlisted}
+
+Cierta empresa TIC tiene todos sus posibles procesos documentados,
+formalizados y estandarizados, de manera que, cuando inicias un
+proyecto, la metodología te indica que tienes que rellenar, actualizar y
+mantener, por decir una cifra (y no me quedo corto) mas de 500
+documentos diferentes y especifícos. No se queda nada al azar ni a la
+consideración personal. Cada uno de ellos es relevante dentro del ciclo
+de vida del proyecto e importante.
+
+Ahora bien, lo primero que te indica la metodología es que debes hacer
+"*tailoring*" de acuerdo con las características de tu proyecto y tus
+capacidades (las cuales se asumen):
+
+-   No vale no hacer ninguno, existen un mínimo de obligado cumplimiento
+-   No tiene sentido hacer todos
+-   Esta es una labor critica del practicioner, por que en función de
+    esa documentación se basará y se medirá el proyecto y así será
+    realizado, y el hecho de haber obviado documentación "crítica" puede
+    llevar al proyecto al fracaso
+
+## SGSI
+
+Sistema de Gestión de Seguridad de la Información, tambien conocido como
+normas ISO 27xxx.
+
+Se trata de un conjunto de políticas, procedimientos, controles y
+estandares que permiten a una organización gestionar la seguridad de sus
+datos, protegiendo la confidencialidad, integridad y disponibilidad de
+la información, así como permitir cumplir con las normativa y
+regulaciones aplicables y mejorar la seguridad de la información.
+
+SGSI no se refiere a, aunque es parte de, los procesos de autenticación,
+autorización de usuarios y trazabilidad de la información. SGSI, como se
+ha dicho, es un conjunto de cosas que se deben considerar, incluir y
+mantener desde el inicio de cualquier proyecto TIC.
+
+Tailoring es un concepto tomado del mundo de la costura y hace
+referencia a que prácticamente nada es *out-of-the-box*, o dicho de otro
+modo, la capacidad propia para, dado un procedimiento, un proceso, una
+metodología, ajustarlo a la medida de nuestras necesidades

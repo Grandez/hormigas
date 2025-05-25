@@ -1,0 +1,9 @@
+## Modelo de datos fisico
+
+aqui la empresa
+```{r, evaluate=TRUE, results='asis'}
+files = list.files(pattern="*.qmd")
+```
+
+{{< include bbdd/02001_tipos.qmd >}}
+{{< include bbdd/02002_particiones.qmd >}}

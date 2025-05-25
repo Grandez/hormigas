@@ -5,6 +5,7 @@ Traducción del articulo de Donald E. Knuth disponible en [AMC Digital Library](
 y publicado en Diciembre de 1.974
 
 Cuando *Communications of the ACM* comenzó su publicación en 1959, los miembros del Consejo Editorial de la ACM hicieron el siguiente comentario al describir los propósitos de las publicaciones de la ACM:  
+
 > “Si la programación de computadoras va a convertirse en una parte importante de la investigación y desarrollo en informática, debe lograrse una transición de la programación como arte hacia una ciencia disciplinada.”
 
 Tal objetivo ha sido un tema recurrente a lo largo de los años; por ejemplo, en 1970 leímos sobre “los primeros pasos hacia la transformación del arte de programar en una ciencia.”  

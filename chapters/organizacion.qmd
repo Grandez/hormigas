@@ -2,4 +2,14 @@
 title: "Organizacion"
 ---
 
-Sobre la organizacion
+## Acerca de 
+
+La parte de conceptos básicos y filosóficos previos a cualquier consideración
+
+{{< include organizacion/fractal.qmd >}}
+{{< include organizacion/smith.qmd >}}
+{{< include organizacion/arthur.qmd >}}
+{{< include organizacion/cmmi.qmd >}}
+{{< include organizacion/departamento.qmd >}}
+{{< include organizacion/pactitioner.qmd >}}
+

@@ -105,7 +105,24 @@ que ser conscientes de esas limitaciones y en la medida de lo posible, usarlas e
 Como caso curioso, si alguien esta interesado, le invito a que programe el siguiente pseudocodigo
 en su lenguaje favorito:
 
-``` {eval = FALSE, echo=TRUE}
+---
+title: "Ejecutar C en Quarto"
+format: html
+execute:
+  echo: true
+---
+
+```{r, engine='c', echo=TRUE}
+#include <stdio.h>
+
+int main() {
+  printf("¡Hola desde C en Quarto!\n");
+  return 0;
+}
+```
+
+
+
 A = pi
 B = 0 - pi
 C = A + B
@@ -122,5 +139,6 @@ else
    imprime "D NO es cero"
 fin si   
 
-```
+
+
 
